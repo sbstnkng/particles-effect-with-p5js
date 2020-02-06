@@ -22,16 +22,16 @@ function draw() {
 class Particle {
     constructor() {
         // Position
-        this.pos = createVector(random(width), random(height));
+        this.position = createVector(random(width), random(height));
         // Velocity
-        this.vel = createVector(random(-2, 2), random(-2, 2));
+        this.velocity = createVector(random(-2, 2), random(-2, 2));
         // Size
         this.size = 10;
     }
 
     // Update movement by adding velocity
     update() {
-        this.pos.add(this.vel);
+        this.position.add(this.velocity);
         this.edges();
     }
 
@@ -39,28 +39,28 @@ class Particle {
     draw() {
         noStroke();
         fill('rgba(255, 255, 255, 0.5)');
-        circle(this.pos.x, this.pos.y, this.size);
+        circle(this.position.x, this.position.y, this.size);
     }
 
     // Detect edges
     edges() {
-        if(this.pos.x < 0 || this.pos.x > width) {
-            this.vel.x *= -1;
+        if(this.position.x < 0 || this.position.x > width) {
+            this.velocity.x *= -1;
         }
 
-        if(this.pos.y < 0 || this.pos.y > height) {
-            this.vel.y *= -1;
+        if(this.position.y < 0 || this.position.y > height) {
+            this.velocity.y *= -1;
         }
     }
 
     // Connect particles
     checkParticles(particles) {
         particles.forEach(particle => {
-            const distance = dist(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y);
+            const distance = dist(this.position.x, this.position.y, particle.position.x, particle.position.y);
 
             if (distance < 120) {
                 stroke('rgba(255, 255, 255, 0.1)');
-                line(this.pos.x, this.pos.y, particle.pos.x, particle.pos.y)
+                line(this.position.x, this.position.y, particle.position.x, particle.position.y)
             }
         });
     }
